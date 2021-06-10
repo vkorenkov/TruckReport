@@ -1,0 +1,9 @@
+E:\Projects\TestTask\TruckReportServer\TruckReportLib\bin\Debug\netcoreapp3.1\TruckReportLib.deps.json
+E:\Projects\TestTask\TruckReportServer\TruckReportLib\bin\Debug\netcoreapp3.1\TruckReportLib.dll
+E:\Projects\TestTask\TruckReportServer\TruckReportLib\bin\Debug\netcoreapp3.1\TruckReportLib.pdb
+E:\Projects\TestTask\TruckReportServer\TruckReportLib\obj\Debug\netcoreapp3.1\TruckReportLib.csprojAssemblyReference.cache
+E:\Projects\TestTask\TruckReportServer\TruckReportLib\obj\Debug\netcoreapp3.1\TruckReportLib.AssemblyInfoInputs.cache
+E:\Projects\TestTask\TruckReportServer\TruckReportLib\obj\Debug\netcoreapp3.1\TruckReportLib.AssemblyInfo.cs
+E:\Projects\TestTask\TruckReportServer\TruckReportLib\obj\Debug\netcoreapp3.1\TruckReportLib.csproj.CoreCompileInputs.cache
+E:\Projects\TestTask\TruckReportServer\TruckReportLib\obj\Debug\netcoreapp3.1\TruckReportLib.dll
+E:\Projects\TestTask\TruckReportServer\TruckReportLib\obj\Debug\netcoreapp3.1\TruckReportLib.pdb

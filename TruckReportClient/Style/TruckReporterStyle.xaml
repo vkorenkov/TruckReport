@@ -1,0 +1,316 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--#region TextBox-->
+    <Style
+        x:Key="TextBoxStyle"
+        TargetType="TextBox">
+        <Setter
+            Property="Margin"
+            Value="5" />
+        <Setter
+            Property="TextWrapping"
+            Value="Wrap" />
+        <Setter
+            Property="Template">
+            <Setter.Value>
+                <ControlTemplate
+                    TargetType="{x:Type TextBox}">
+                    <Border
+                        x:Name="border"
+                        BorderBrush="DarkGray"
+                        BorderThickness="1"
+                        CornerRadius="3">
+                        <ScrollViewer
+                            x:Name="PART_ContentHost"
+                            Focusable="false"
+                            HorizontalScrollBarVisibility="Hidden"
+                            VerticalScrollBarVisibility="Hidden"
+                            Background="White"
+                            Foreground="#FF1D1D1D" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--Endregion-->
+
+    <!--#region ComboBox-->
+    <SolidColorBrush
+        x:Key="ComboBackgroundBrush"
+        Color="#EAEAEA" />
+    <Style
+        x:Key="ComboBoxTextBoxStyle"
+        TargetType="{x:Type TextBox}">
+        <Setter
+            Property="Background"
+            Value="{StaticResource ComboBackgroundBrush}" />
+        <Setter
+            Property="Template">
+            <Setter.Value>
+                <ControlTemplate
+                    TargetType="{x:Type TextBox}">
+                    <Grid>
+                        <Border
+                            CornerRadius="2,0,0,2"
+                            BorderThickness="1,1,0,1"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="#A0A1A2">
+                            <ScrollViewer
+                                x:Name="PART_ContentHost" />
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style
+        x:Key="ComboBoxButtonStyle"
+        TargetType="{x:Type ToggleButton}">
+        <Setter
+            Property="Background"
+            Value="{StaticResource ComboBackgroundBrush}" />
+        <Setter
+            Property="Template">
+            <Setter.Value>
+                <ControlTemplate
+                    TargetType="{x:Type ToggleButton}">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        x:Name="border"
+                        CornerRadius="0,2,2,0"
+                        BorderThickness="0,1,1,1"
+                        BorderBrush="#A0A1A2">
+                        <ContentPresenter />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style
+        x:Key="ComboBoxOverlayToggleButtonStyle"
+        TargetType="ToggleButton">
+        <Setter
+            Property="Focusable"
+            Value="False" />
+        <Setter
+            Property="ClickMode"
+            Value="Press" />
+        <Setter
+            Property="Template">
+            <Setter.Value>
+                <ControlTemplate
+                    TargetType="ToggleButton">
+                    <Grid
+                        Background="Transparent" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style
+        TargetType="{x:Type ComboBox}">
+        <Setter
+            Property="HorizontalContentAlignment"
+            Value="Left" />
+        <Setter
+            Property="VerticalContentAlignment"
+            Value="Center" />
+        <Setter
+            Property="IsReadOnly"
+            Value="True" />
+        <Setter
+            Property="Margin"
+            Value="5" />
+        <Setter
+            Property="Template">
+            <Setter.Value>
+                <ControlTemplate
+                    TargetType="{x:Type ComboBox}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition
+                                MaxWidth="18" />
+                        </Grid.ColumnDefinitions>
+
+                        <ToggleButton
+                            Grid.Column="0"
+                            Style="{StaticResource ComboBoxOverlayToggleButtonStyle}"
+                            IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                        <TextBox
+                            Name="PART_EditableTextBox"
+                            Padding="0,0,0,0"
+                            BorderBrush="#A0A1A2"
+                            Style="{StaticResource ComboBoxTextBoxStyle}"
+                            Background="{TemplateBinding Background}"
+                            IsHitTestVisible="{TemplateBinding IsEditable}" />
+
+                        <ToggleButton
+                            Grid.Column="1"
+                            Height="{TemplateBinding Height}"
+                            Style="{StaticResource ComboBoxButtonStyle}"
+                            Focusable="False"
+                            IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                            ClickMode="Press"
+                            Background="{TemplateBinding Background}">
+                            <Path
+                                Grid.Column="1"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Data="M 0 0 L 4 4 L 8 0 Z"
+                                Fill="Black" />
+                        </ToggleButton>
+
+                        <ContentPresenter
+                            Grid.Column="0"
+                            Name="ContentSite"
+                            Content="{TemplateBinding SelectionBoxItem}"
+                            ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                            ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            Margin="6,0,0,0" />
+
+                        <Popup
+                            Grid.Column="0"
+                            Name="Popup"
+                            Placement="Bottom"
+                            IsOpen="{TemplateBinding IsDropDownOpen}"
+                            AllowsTransparency="True"
+                            Focusable="False"
+                            PopupAnimation="Slide">
+
+                            <Grid
+                                Name="DropDown"
+                                SnapsToDevicePixels="True"
+                                MinWidth="{TemplateBinding ActualWidth}"
+                                MaxHeight="{TemplateBinding MaxDropDownHeight}">
+
+                                <Border
+                                    x:Name="DropDownBorder"
+                                    BorderThickness="1"
+                                    CornerRadius="2"
+                                    Background="White"
+                                    BorderBrush="#A0A1A2" />
+                                <ScrollViewer
+                                    SnapsToDevicePixels="True">
+                                    <StackPanel
+                                        IsItemsHost="True"
+                                        KeyboardNavigation.DirectionalNavigation="Contained" />
+                                </ScrollViewer>
+                            </Grid>
+
+                        </Popup>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--Endregion-->
+
+    <!--Region Button-->
+    <Style
+        TargetType="Button">
+        <Setter
+            Property="Margin"
+            Value="5" />
+        <Setter
+            Property="Template">
+            <Setter.Value>
+                <ControlTemplate
+                    TargetType="{x:Type Button}">
+                    <Border
+                        x:Name="border"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Background="{TemplateBinding Background}"
+                        SnapsToDevicePixels="true"
+                        CornerRadius="3">
+                        <ContentPresenter
+                            x:Name="contentPresenter"
+                            Focusable="False"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            Margin="{TemplateBinding Padding}"
+                            RecognizesAccessKey="True"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger
+                            Property="IsMouseOver"
+                            Value="True">
+                            <Setter
+                                Property="Background"
+                                Value="DarkGray" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter
+                                Property="Background"
+                                Value="Gray" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--Endregion-->
+
+    <Style TargetType="ListView">
+        <Setter
+            Property="BorderBrush"
+            Value="DarkGray" />
+        <Setter
+            Property="BorderThickness"
+            Value="1" />
+        <Setter
+            Property="Margin"
+            Value="5" />
+        <Setter
+            Property="ScrollViewer.CanContentScroll"
+            Value="True" />
+        <Setter
+            Property="ScrollViewer.HorizontalScrollBarVisibility"
+            Value="Disabled" />
+        <Setter
+            Property="Template">
+            <Setter.Value>
+                <ControlTemplate
+                    TargetType="{x:Type ListView}">
+                    <Border
+                        x:Name="Bd"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="3"
+                        Padding="1"
+                        SnapsToDevicePixels="true">
+                        <ScrollViewer
+                            Focusable="false"
+                            Padding="{TemplateBinding Padding}"
+                            Template="{DynamicResource ScrollViewerControlTemplate1}">
+                            <ItemsPresenter
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </ScrollViewer>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition
+                                    Property="IsGrouping"
+                                    Value="true" />
+                                <Condition
+                                    Property="VirtualizingPanel.IsVirtualizingWhenGrouping"
+                                    Value="false" />
+                            </MultiTrigger.Conditions>
+                            <Setter
+                                Property="ScrollViewer.CanContentScroll"
+                                Value="false" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>
